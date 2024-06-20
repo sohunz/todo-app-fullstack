@@ -1,17 +1,15 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Button } from "../../@/components/ui/button";
 import {
     Dialog,
     DialogContent,
     DialogFooter,
-    DialogHeader,
-    DialogDescription,
-    DialogTitle,
     DialogTrigger,
 } from "../../@/components/ui/dialog";
 import { Input } from "../../@/components/ui/input";
 import { Label } from "../../@/components/ui/label";
+import { TodoType } from "../types/type";
 
 const TodoList = () => {
     const [todos, setTodos] = useState([]);
@@ -25,17 +23,17 @@ const TodoList = () => {
         fetchTodo();
     }, []);
 
-    const handleDelete = (id) => {
+    const handleDelete = (id: number) => {
         axios.delete(`http://localhost:8080/api/todo/${id}`);
-        setTodos(todos.filter((todo) => todo.id !== id));
+        setTodos(todos.filter((todo: TodoType) => todo.id !== id));
     };
 
-    const handleUpdateChange = (e) => {
+    const handleUpdateChange = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         setValue(e.target.value);
     };
 
-    const handleUpdate = async (id) => {
+    const handleUpdate = async (id: number) => {
         axios.put(`http://localhost:8080/api/todo/${id}`, {
             title: value,
         });
@@ -51,7 +49,7 @@ const TodoList = () => {
 
     return (
         <div className="max-w-lg mx-auto space-y-2">
-            {todos.map((todo) => {
+            {todos.map((todo: TodoType) => {
                 return (
                     <div
                         key={todo.id}

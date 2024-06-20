@@ -1,12 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Button } from "../../@/components/ui/button";
 import { Input } from "../../@/components/ui/input";
 
 const TodoForm = () => {
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState<string>("");
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
     };
     const handleAddTodo = () => {
